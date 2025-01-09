@@ -38,6 +38,7 @@ fn main() -> eyre::Result<()> {
         cli::Commands::Export {
             collection_name,
             output_path,
+            format,
         } => {
             let cred = Credentials::read_from_file(cli.config_path)?;
 
@@ -51,7 +52,7 @@ fn main() -> eyre::Result<()> {
                 .ok_or_eyre("no collection with the given name was found")?
                 .key;
 
-            let file_content = zotero_client.get_bibliography(collection_key)?;
+            let file_content = zotero_client.get_items(collection_key, format)?;
 
             fs::write(&output_path, file_content)?;
 

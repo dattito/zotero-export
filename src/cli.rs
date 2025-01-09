@@ -20,6 +20,9 @@ pub enum Commands {
 
         #[arg(short, long, default_value=default_output_path().into_os_string())]
         output_path: PathBuf,
+
+        #[arg(short, long, default_value="biblatex")]
+        format: String,
     },
 }
 

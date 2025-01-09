@@ -42,13 +42,13 @@ impl ZoteroClient {
         Ok(res)
     }
 
-    pub fn get_bibliography(&self, collection_key: String) -> reqwest::Result<bytes::Bytes> {
+    pub fn get_items(&self, collection_key: String, format: String) -> reqwest::Result<bytes::Bytes> {
         self.client
             .get(format!(
                 "{}/users/{}/collections/{}/items",
                 ZOTERO_BASE_URL, self.cred.user_id, collection_key
             ))
-            .query(&[("format", "biblatex")])
+            .query(&[("format", format)])
             .header("Authorization", format!("Bearer {}", self.cred.api_key))
             .send()?
             .bytes()

@@ -1,6 +1,6 @@
 # zotero-export
 
-This is a small CLI tool that allows downloading the biblatex for a collection and storing it in a file.
+This is a small CLI tool that allows downloading the items (mostly for the biblatex format) of a collection and storing it in a file.
 It uses the cloud access of zotero, not the local application.
 
 ToDo:
