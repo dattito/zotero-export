@@ -1,5 +1,3 @@
-use std::io::Read;
-
 use serde::Deserialize;
 
 use crate::credentials::Credentials;

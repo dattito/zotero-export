@@ -42,10 +42,3 @@ impl Credentials {
         Ok(())
     }
 }
-
-fn get_credentials() -> eyre::Result<Credentials> {
-    Ok(Credentials {
-        user_id: "12147112".into(),
-        api_key: "s0YxVw53TiNR208cbbgI8Klz".into(),
-    })
-}
