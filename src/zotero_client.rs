@@ -28,7 +28,7 @@ impl ZoteroClient {
         }
     }
 
-    pub fn get_collections(&self) -> eyre::Result<Vec<Collection>> {
+    pub fn collections(&self) -> eyre::Result<Vec<Collection>> {
         let res: Vec<Collection> = self
             .client
             .get(format!(
@@ -42,13 +42,13 @@ impl ZoteroClient {
         Ok(res)
     }
 
-    pub fn get_items(&self, collection_key: String, format: String) -> reqwest::Result<bytes::Bytes> {
+    pub fn items(&self, collection_key: String, format: String, limit: u32) -> reqwest::Result<bytes::Bytes> {
         self.client
             .get(format!(
                 "{}/users/{}/collections/{}/items",
                 ZOTERO_BASE_URL, self.cred.user_id, collection_key
             ))
-            .query(&[("format", format)])
+            .query(&[("format", format), ("style", "ieee".into()), ("limit", format!("{limit}"))])
             .header("Authorization", format!("Bearer {}", self.cred.api_key))
             .send()?
             .bytes()

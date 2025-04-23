@@ -23,6 +23,9 @@ pub enum Commands {
 
         #[arg(short, long, default_value="biblatex")]
         format: String,
+
+        #[arg(short, long, default_value="100")]
+        limit: u32,
     },
 }
 

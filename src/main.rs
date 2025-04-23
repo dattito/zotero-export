@@ -39,12 +39,13 @@ fn main() -> eyre::Result<()> {
             collection_name,
             output_path,
             format,
+            limit,
         } => {
             let cred = Credentials::read_from_file(cli.config_path)?;
 
             let zotero_client = ZoteroClient::new(cred);
 
-            let collections = zotero_client.get_collections()?;
+            let collections = zotero_client.collections()?;
 
             let collection_key = collections
                 .into_iter()
@@ -52,7 +53,7 @@ fn main() -> eyre::Result<()> {
                 .ok_or_eyre("no collection with the given name was found")?
                 .key;
 
-            let file_content = zotero_client.get_items(collection_key, format)?;
+            let file_content = zotero_client.items(collection_key, format, limit)?;
 
             fs::write(&output_path, file_content)?;
 
